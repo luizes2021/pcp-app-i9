@@ -11,8 +11,10 @@ from app.config import PARAMETROS_SISTEMA
 app = FastAPI()
 
 # ⚠️ CONFIRME SE O CAMINHO EXISTE EXATAMENTE ASSIM
-templates = Jinja2Templates(directory="app/Templates")
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "Templates"))
 
 @app.get("/")
 def root():
