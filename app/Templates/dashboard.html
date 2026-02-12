@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>PCP Diário – HMLV</title>
+    <title>PCP i9</title>
 </head>
 <body>
-    <h1>PCP Diário – Ambiente HMLV</h1>
 
-    <form action="/dashboard" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <button type="submit">Executar PCP</button>
-    </form>
+<h1>PCP i9 – Simulador de Prioridades</h1>
 
-    {% if resultado %}
-        <h2>Resumo do Sistema</h2>
-        <ul>
-            <li><strong>Gargalo:</strong> {{ resultado.gargalo }}</li>
-            <li><strong>Carga do Gargalo:</strong> {{ resultado.carga_gargalo }}</li>
-            <li><strong>Atraso Acumulado:</strong> {{ resultado.atraso_acumulado }}</li>
-        </ul>
+<h2>Parâmetros de Entrada</h2>
 
-        <h2>Ranking Prescrito</h2>
-        <table border="1">
-            <tr>
-                <th>Prioridade</th>
-                <th>Pedido</th>
-                <th>Recurso</th>
-                <th>Data Prometida</th>
-                <th>Tempo Proc.</th>
-            </tr>
-            {% for r in resultado.ranking %}
-            <tr>
-                <td>{{ r.prioridade }}</td>
-                <td>{{ r.pedido }}</td>
-                <td>{{ r.recurso }}</td>
-                <td>{{ r.data_prometida }}</td>
-                <td>{{ r.tempo_proc }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
+<form action="/upload_pedidos" method="post" enctype="multipart/form-data">
+
+    <label>Horas disponíveis por dia:</label><br>
+    <input type="number" name="horas_disponiveis" value="8" step="0.5"><br><br>
+
+    <label>Eficiência média do sistema:</label><br>
+    <input type="number" name="eficiencia" value="0.85" step="0.01"><br><br>
+
+    <label>Tempo médio de setup (horas):</label><br>
+    <input type="number" name="setup" value="0.5" step="0.1"><br><br>
+
+    <label>Arquivo de pedidos (Excel):</label><br>
+    <input type="file" name="file"><br><br>
+
+    <button type="submit">Executar PCP</button>
+
+</form>
+
+<hr>
+
+{% if gargalo %}
+
+<h2>Resultados</h2>
+
+<p><b>Gargalo identificado:</b> {{ gargalo }}</p>
+<p><b>Indicador de atraso:</b> {{ atraso_total }}</p>
+
+<h3>Ranking de Prioridades</h3>
+
+<table border="1">
+<tr>
+    <th>Pedido</th>
+    <th>Recurso</th>
+    <th>Quantidade</th>
+</tr>
+
+{% for p in ranking %}
+<tr>
+    <td>{{ p.pedido }}</td>
+    <td>{{ p.recurso }}</td>
+    <td>{{ p.quantidade }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endif %}
+
 </body>
 </html>

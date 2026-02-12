@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PCP App - Teste</title>
+</head>
+<body>
+
+<h2>Parâmetros de Entrada</h2>
+
+<form action="/executar" method="post">
+    <label>Capacidade do Recurso (unidades/semana):</label><br>
+    <input type="number" name="capacidade_recurso" required><br><br>
+
+    <label>Caminho do arquivo de pedidos:</label><br>
+    <input type="text" name="caminho_arquivo" value="data/pedidos.csv" required><br><br>
+
+    <button type="submit">Executar</button>
+</form>
+
+<hr>
+
+<h3>Resultado</h3>
+<p>{{ resultado }}</p>
+
+</body>
+</html>
