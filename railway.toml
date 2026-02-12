@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 [build]
 builder = "NIXPACKS"
 
 [deploy]
 startCommand = "uvicorn app.api:app --host 0.0.0.0 --port $PORT"
+=======
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "uvicorn app.api:app --host 0.0.0.0 --port $PORT"
+>>>>>>> 7244d655da2d4106b8284627a8b2e20719bc727c
